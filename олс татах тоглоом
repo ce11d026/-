@@ -4,9 +4,9 @@
  * Created: 3/24/2015 10:27:04 PM
  *  Author: Ochiroo
  */ 
+// ATMEGA16 controlleriin garaltiin portuud 0-eer idewhjideg
 
-
-#define F_CPU 12000000L
+#define F_CPU 12000000L // clock 12MHZ/
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/sfr_defs.h>
@@ -14,21 +14,21 @@
 int main(void)
 {
 	DDRA |=(1<<PA2); 
-	DDRB =0xff; 
-	PORTD=0b00001100; 
+	DDRB =0xff; //B portiig garalt bolgoj bn/
+	PORTD=0b00001100; // PIND1 BOLON PIND2 OROLT BOLGOJ BN BUTTON/  
 	PORTB=0xf7; 
 	PORTA &=~(1<<PA2); 
 	
 	
-	unsigned char a=0x08; 
+	unsigned char a=0x08;        
 	
     while(1)
     {
-		if(a==0x01)
+		if(a==0x01)                      // herwee hamgiin zvvn zahiin gerel aswal /
 		{
-			   PORTB=0xf0;
+			   PORTB=0xf0;    // b portnii ehnii 4 gerliig asaana
 			   _delay_ms(100);
-			    PORTB=0xff;
+			    PORTB=0xff;     // b portiig untraana/
 			   _delay_ms(100);
 			      PORTB=0xf0;
 			   _delay_ms(100);
@@ -50,11 +50,11 @@ int main(void)
 			   PORTB=0xf7;
 			   
 			   }
-	else if(a==0x40)
+	else if(a==0x40) //herwee baruun zahiin gerel aswal //
 			 {
-			    PORTB=0x87;
+			    PORTB=0x87;    //b port-d 10000111 utga ogch bn//
 			   _delay_ms(100);
-			    PORTB=0xff;
+			    PORTB=0xff;      // b port-d 11111111 utga ogch untraaj bna
 			   _delay_ms(100);
 			    PORTB=0x87;
 			   _delay_ms(100);
@@ -76,20 +76,20 @@ int main(void)
 			   PORTB=0xf7;
 			 }				
 			  
-        if (bit_is_clear(PIND,2))
+        if (bit_is_clear(PIND,2)) // HERWEE PIND2 UTGA 0 ORJ IRWEL//
         {
 							 
-			if (a = a>>1); 
+			if (a = a>>1); // BARUUN TIISH 1 SHILVVL(SHIFT RIGHT)//
 			
 			PORTB=~a; 
 			_delay_ms(200); 
         } 
-        else if(bit_is_clear(PIND,3))
+        else if(bit_is_clear(PIND,3))  // HERWEE PIND2 UTGA 0 ORJ IRWEL//
         {
 			if (a = a<<1);
 			
 			PORTB=~a;
-			_delay_ms(200);
+			_delay_ms(200);  // ZUUN TIISH 1 SHILVVL(SHIFT LEFTT)//
         }
     }
 }
